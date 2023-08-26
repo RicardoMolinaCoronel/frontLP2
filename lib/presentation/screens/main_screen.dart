@@ -22,37 +22,34 @@ class _MainScreenState extends State<MainScreen> {
     final colors = AppTheme.colors;
     List<Post> posts = [
       Post(
-          title: "Resident evil el mejor game",
+          title: "Exoprimial",
+          description:
+              "Sin duda, Capcom vive una segunda era de oro desde hace un puñado de años. Aunque tuvo deslices como el controversial Resident Evil 3 Remake, en general entregó experiencias de muy buena calidad que conquistaron los corazones de los fanáticos y vendieron millones de copias. Por desgracia, su racha positiva terminó con su más reciente lanzamiento",
+          comments: 5,
+          likes: 2,
+          shares: 1,
+          dateCreated: "noviembre",
+          urlImg: "https://i.ibb.co/pzy6CDg/exo.jpg",
+          isLiked: false),
+      Post(
+          title: "Blasphemous 2",
           description:
               "Blasphemous 2 es todo lo que deseábamos y más; es una secuela hecha como dictan los cánones, porque respeta todo lo que el original logró y lo expande enormemente. ¿Es necesario haber jugado el primero? No. ",
           comments: 5,
           likes: 2,
           shares: 1,
           dateCreated: "noviembre",
-          urlImg:
-              "https://i.pinimg.com/originals/1c/aa/03/1caa032c47f63d50902b9d34492e1303.jpg",
-          isLiked: false),
-      Post(
-          title: "Resident evil goty",
-          description:
-              "Blasphemous 2 brilla gracias a su combate estilo souls lleno de ejecuciones, mucha precisión y violencia que está lejos de ser innecesaria y hasta roza lo estético.",
-          comments: 5,
-          likes: 2,
-          shares: 1,
-          dateCreated: "noviembre",
-          urlImg:
-              "https://i.pinimg.com/originals/1c/aa/03/1caa032c47f63d50902b9d34492e1303.jpg",
+          urlImg: "https://i.ibb.co/qnxLs0g/blasphemous2.jpg",
           isLiked: true),
       Post(
           title: "Resident evil goty",
           description:
-              "Con esto en mente, Ascendant Studios se embarcó en una tarea complicada: dar una bocanada de aire fresco al gén",
+              "Resident Evil 4 conserva la esencia del juego original, a la vez que introduce mecánicas de juego actualizadas.",
           comments: 5,
           likes: 2,
           shares: 1,
           dateCreated: "noviembre",
-          urlImg:
-              "https://i.pinimg.com/originals/1c/aa/03/1caa032c47f63d50902b9d34492e1303.jpg",
+          urlImg: "https://i.ibb.co/Bt5P84F/residentevil4.jpg",
           isLiked: true),
       Post(
           title: "Resident evil sobrevalo?",
@@ -83,12 +80,21 @@ class _MainScreenState extends State<MainScreen> {
       appBar: AppBar(
         backgroundColor: colors.red1,
         elevation: 0,
+        centerTitle: true,
         title: const Text("G A M M U N I T Y",
             style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white)),
         leading: IconButton(
           onPressed: () {},
           icon: const Icon(Icons.menu, color: Colors.white),
         ),
+        actions: [
+          IconButton(
+              onPressed: () {},
+              icon: Icon(
+                Icons.person,
+                color: Colors.white,
+              ))
+        ],
       ),
       body: IndexedStack(
         index: selectedIndex,
