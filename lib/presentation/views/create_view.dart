@@ -119,10 +119,12 @@ class _CreateViewState extends State<CreateView> {
                               ),
                               SizedBox(height: 10),
                               Row(children: [
+                                SizedBox(width: 20),
                                 GestureDetector(
                                   child: Icon(
                                     Icons.image,
                                     color: Colors.grey,
+                                    size: 35,
                                   ),
                                   onTap: () {
                                     setState(() {
@@ -130,7 +132,7 @@ class _CreateViewState extends State<CreateView> {
                                     });
                                   },
                                 ),
-                                SizedBox(width: 250),
+                                SizedBox(width: 210),
                                 ElevatedButton(
                                   onPressed: () {
                                     // Lógica para guardar el comentario
