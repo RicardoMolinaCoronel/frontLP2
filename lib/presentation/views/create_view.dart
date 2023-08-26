@@ -57,15 +57,24 @@ class _CreateViewState extends State<CreateView> {
               ),
             ),
             ElevatedButton(
-              child: const Text(
-                'Crear Evento',
-                style: TextStyle(
-                  color: Color.fromARGB(255, 29, 29,
-                      29), // Cambia este color según tus necesidades
-                  fontSize: 18, // Tamaño de fuente opcional
-                  fontWeight: FontWeight.bold, // Peso de fuente opcional
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                const Text(
+                  'Crear Evento',
+                  style: TextStyle(
+                    color: Color.fromARGB(255, 29, 29,
+                        29), // Cambia este color según tus necesidades
+                    fontSize: 18, // Tamaño de fuente opcional
+                    fontWeight: FontWeight.bold, // Peso de fuente opcional
+                  ),
                 ),
-              ),
+                Icon(
+                  Icons.event_available,
+                  color: Colors.grey,
+                  size: 27,
+                ),
+              ]),
               onPressed: () {
                 showModalBottomSheet(
                   context: context,
