@@ -85,20 +85,43 @@ class _CreateViewState extends State<CreateView> {
                         ),
                       ),
                       SizedBox(height: 10),
+                       TextField(
+                        maxLines: 1,
+                        style: TextStyle(color: Color.fromARGB(255, 107, 107, 107),fontSize: 24,fontWeight: FontWeight.w600),
+                        decoration: InputDecoration(
+                          hintText: 'Titulo',
+                          hintStyle: TextStyle(color: Color.fromARGB(255, 107, 107, 107),fontSize: 24)
+                        ),
+                      ),
                       TextFormField(
                         maxLines: 5,
+                         style: TextStyle(color: Color.fromARGB(255, 107, 107, 107),fontSize: 18,fontWeight: FontWeight.w700),
                         decoration: InputDecoration(
-                          hintText: 'Escribe tu comentario aquí...',
-                          border: OutlineInputBorder(),
+                          hintText: 'Escribe tu texto aquí...',
+                          hintStyle: TextStyle(color: Color.fromARGB(255, 107, 107, 107),fontSize: 18),
                         ),
                       ),
                       SizedBox(height: 10),
+                      Row(
+                        children:[
+                          GestureDetector(
+            child: Icon(
+                Icons.image,
+               color:  Colors.grey,
+                 ),
+                onTap: () {
+             setState(() { // COLOCAR FUNCION AQUI 
+           });
+        },
+      ),
                       ElevatedButton(
                         onPressed: () {
                           // Lógica para guardar el comentario
                           Navigator.pop(context);
                         },
                         child: Text('Crear'),
+                      ),
+                        ]
                       ),
                     ],
                   ),
