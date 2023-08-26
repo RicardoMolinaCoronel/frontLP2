@@ -82,7 +82,7 @@ class _MainScreenState extends State<MainScreen> {
         elevation: 0,
         centerTitle: true,
         title: const Text("G A M M U N I T Y",
-            style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white)),
+            style: TextStyle(fontWeight: FontWeight.w900, color: Color.fromARGB(255, 27, 27, 27))),
         leading: IconButton(
           onPressed: () {},
           icon: const Icon(Icons.menu, color: Colors.white),
