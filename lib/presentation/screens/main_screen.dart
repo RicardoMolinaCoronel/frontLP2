@@ -19,7 +19,7 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     //final colors = Theme.of(context).colorScheme;
-    final colors = AppTheme.colors;
+    const colors = AppTheme.colors;
     List<Post> posts = [
       Post(
           title: "Exoprimial",
@@ -82,18 +82,17 @@ class _MainScreenState extends State<MainScreen> {
         elevation: 0,
         centerTitle: true,
         title: const Text("G A M M U N I T Y",
-            style: TextStyle(fontWeight: FontWeight.w900, color: Color.fromARGB(255, 27, 27, 27))),
+            style: TextStyle(
+                fontWeight: FontWeight.w900,
+                color: Color.fromARGB(255, 27, 27, 27))),
         leading: IconButton(
           onPressed: () {},
-          icon: const Icon(Icons.menu, color: Colors.white),
+          icon: const Icon(Icons.menu, color: Color.fromRGBO(37, 37, 37, 1)),
         ),
         actions: [
           IconButton(
               onPressed: () {},
-              icon: Icon(
-                Icons.person,
-                color: Colors.white,
-              ))
+              icon: Icon(Icons.person, color: Color.fromRGBO(37, 37, 37, 1)))
         ],
       ),
       body: IndexedStack(
@@ -111,24 +110,33 @@ class _MainScreenState extends State<MainScreen> {
         elevation: 0,
         items: [
           BottomNavigationBarItem(
-            icon: const Icon(Icons.book_outlined),
-            activeIcon: const Icon(Icons.book),
+            icon: const Icon(
+              Icons.book_outlined,
+              color: Color.fromRGBO(37, 37, 37, 1),
+            ),
+            activeIcon:
+                const Icon(Icons.book, color: Color.fromRGBO(37, 37, 37, 1)),
             label: 'Posts',
             backgroundColor: colors.red1,
           ),
           BottomNavigationBarItem(
-            icon: const Icon(Icons.star_border),
-            activeIcon: const Icon(Icons.star),
+            icon: const Icon(Icons.star_border,
+                color: Color.fromRGBO(37, 37, 37, 1)),
+            activeIcon:
+                const Icon(Icons.star, color: Color.fromRGBO(37, 37, 37, 1)),
             label: 'Events',
             backgroundColor: colors.red1,
           ),
           BottomNavigationBarItem(
-            icon: const Icon(Icons.create_outlined),
-            activeIcon: const Icon(Icons.create),
+            icon: const Icon(Icons.create_outlined,
+                color: Color.fromRGBO(37, 37, 37, 1)),
+            activeIcon:
+                const Icon(Icons.create, color: Color.fromRGBO(37, 37, 37, 1)),
             label: 'Create',
             backgroundColor: colors.red1,
           ),
         ],
+        selectedItemColor: Color.fromRGBO(37, 37, 37, 1),
       ),
     );
   }
