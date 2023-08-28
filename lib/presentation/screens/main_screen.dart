@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:flutter_application_1/presentation/views/posts_view.dart';
 import 'package:flutter_application_1/presentation/views/events_view.dart';
 import 'package:flutter_application_1/presentation/views/create_view.dart';
@@ -74,6 +76,41 @@ class _MainScreenState extends State<MainScreen> {
               "https://i.pinimg.com/originals/1c/aa/03/1caa032c47f63d50902b9d34492e1303.jpg",
           isLiked: true)
     ];
+    
+
+   //Lista de Eventos
+
+    List<Event> events = [
+      Event(
+          title: "Están invitados a este torneo de SF.",
+          description:
+              "Torneo de Street Figther",
+          comments: 8,
+          likes: 5,
+          shares: 3,
+          dateCreated: "Jueves, 19 de mayo",
+          urlImg: "https://i.ibb.co/6WwcvYF/Street-Figther.jpg",
+          isLiked: false),
+
+      Event(
+          title: "Esto va a ser asombroso",
+          description:
+              "Torneo de Smash Bros",
+          comments: 4,
+          likes: 6,
+          shares: 2,
+          dateCreated: "Viernes, 20 de mayo",
+          urlImg: "https://i.ibb.co/G3TLGmT/Ultimate.jpg",
+          isLiked: true),
+    ];
+    
+
+
+
+
+
+   //Lista de Eventos
+
     final screens = [PostsView(posts), const EventsView(), const CreateView()];
 
     return Scaffold(
@@ -99,6 +136,9 @@ class _MainScreenState extends State<MainScreen> {
         index: selectedIndex,
         children: screens,
       ),
+      
+      
+
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.shifting,
         currentIndex: selectedIndex,
@@ -124,6 +164,7 @@ class _MainScreenState extends State<MainScreen> {
                 color: Color.fromRGBO(37, 37, 37, 1)),
             activeIcon:
                 const Icon(Icons.star, color: Color.fromRGBO(37, 37, 37, 1)),
+
             label: 'Events',
             backgroundColor: colors.red1,
           ),
@@ -132,6 +173,7 @@ class _MainScreenState extends State<MainScreen> {
                 color: Color.fromRGBO(37, 37, 37, 1)),
             activeIcon:
                 const Icon(Icons.create, color: Color.fromRGBO(37, 37, 37, 1)),
+
             label: 'Create',
             backgroundColor: colors.red1,
           ),
