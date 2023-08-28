@@ -4,6 +4,8 @@ import 'package:flutter_application_1/presentation/views/posts_view.dart';
 import 'package:flutter_application_1/presentation/views/events_view.dart';
 import 'package:flutter_application_1/presentation/views/create_view.dart';
 import 'package:flutter_application_1/presentation/models/post.dart';
+import 'package:flutter_application_1/presentation/models/event.dart';
+
 import 'package:flutter_application_1/presentation/theme/app_theme.dart';
 
 import 'package:flutter/material.dart';
@@ -82,26 +84,26 @@ class _MainScreenState extends State<MainScreen> {
 
     List<Event> events = [
       Event(
-          title: "Están invitados a este torneo de SF.",
-          description:
+          title1: "Están invitados a este torneo de SF.",
+          description1:
               "Torneo de Street Figther",
-          comments: 8,
-          likes: 5,
-          shares: 3,
-          dateCreated: "Jueves, 19 de mayo",
-          urlImg: "https://i.ibb.co/6WwcvYF/Street-Figther.jpg",
-          isLiked: false),
+          comments1: 8,
+          likes1: 5,
+          shares1: 3,
+          dateCreated1: "Jueves, 19 de mayo",
+          urlImg1: "https://i.ibb.co/6WwcvYF/Street-Figther.jpg",
+          isLiked1: false),
 
       Event(
-          title: "Esto va a ser asombroso",
-          description:
+          title1: "Esto va a ser asombroso",
+          description1:
               "Torneo de Smash Bros",
-          comments: 4,
-          likes: 6,
-          shares: 2,
-          dateCreated: "Viernes, 20 de mayo",
-          urlImg: "https://i.ibb.co/G3TLGmT/Ultimate.jpg",
-          isLiked: true),
+          comments1: 4,
+          likes1: 6,
+          shares1: 2,
+          dateCreated1: "Viernes, 20 de mayo",
+          urlImg1: "https://i.ibb.co/G3TLGmT/Ultimate.jpg",
+          isLiked1: true),
     ];
     
 

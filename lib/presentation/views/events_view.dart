@@ -1,10 +1,10 @@
-import 'package:flutter/material.dart';
-//import 'package:flutter_application_1/presentation/components/item_post.dart';
-import 'package:flutter_application_1/presentation/components/item_event.dart';
 
+import 'package:flutter/material.dart';
+import 'package:flutter_application_1/presentation/components/item_event.dart';
 import 'package:flutter_application_1/presentation/models/event.dart';
-//import 'package:flutter_application_1/presentation/models/post.dart';
+import 'package:flutter_application_1/presentation/models/post.dart';
 import 'package:flutter_application_1/presentation/theme/app_theme.dart';
+
 
 class EventsView extends StatefulWidget {
   List<Event> events;

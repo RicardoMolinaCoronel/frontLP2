@@ -1,20 +1,20 @@
 class Event {
-  String title;
-  String description;
-  String urlImg;
-  int likes;
-  int comments;
-  int shares;
-  String dateCreated;
-  bool isLiked;
+  String title1;
+  String description1;
+  String urlImg1;
+  int likes1;
+  int comments1;
+  int shares1;
+  String dateCreated1;
+  bool isLiked1;
   
   Event(
-      {required this.title,
-      required this.description,
-      required this.urlImg,
-      required this.likes,
-      required this.comments,
-      required this.shares,
-      required this.dateCreated,
-      required this.isLiked});
+      {required this.title1,
+      required this.description1,
+      required this.urlImg1,
+      required this.likes1,
+      required this.comments1,
+      required this.shares1,
+      required this.dateCreated1,
+      required this.isLiked1});
 }
