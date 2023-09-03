@@ -1,4 +1,4 @@
-import 'package:flutter_application_1/presentation/models/Event.dart';
+/*import 'package:flutter_application_1/presentation/models/Event.dart';
 import 'package:flutter_application_1/presentation/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 
@@ -185,3 +185,4 @@ class _ItemEventState extends State<ItemEvent> {
     );
   }
 }
+*/

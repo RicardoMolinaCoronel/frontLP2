@@ -1,14 +1,13 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/presentation/components/item_event.dart';
 import 'package:flutter_application_1/presentation/models/event.dart';
 import 'package:flutter_application_1/presentation/models/post.dart';
 import 'package:flutter_application_1/presentation/theme/app_theme.dart';
 
-
 class EventsView extends StatefulWidget {
-  List<Event> events;
-  EventsView(this.events, {super.key});
+  const EventsView({super.key});
+  //List<Event> events;
+  //EventsView(this.events, {super.key});
 
   @override
   State<EventsView> createState() => _EventsViewState();
@@ -19,7 +18,20 @@ class _EventsViewState extends State<EventsView> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text('Current motors: $count'),
+          FilledButton.tonal(
+              onPressed: () {
+                setState(() {
+                  count++;
+                });
+              },
+              child: const Icon(Icons.add)),
+        ],
+        /* return Scaffold(
       backgroundColor: AppTheme.colors.blue1,
       body: SafeArea(
         child: ListView.builder(
@@ -27,12 +39,12 @@ class _EventsViewState extends State<EventsView> {
           itemBuilder: (context, index) {
             return ItemEvent(child: super.widget.events[index]);
           },
-        ),
+        ),*/
       ),
     );
   }
 
-  Widget _recentEvents(context) {
+/*  Widget _recentEvents(context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -45,5 +57,5 @@ class _EventsViewState extends State<EventsView> {
         ),
       ],
     );
-  }
+  }*/
 }

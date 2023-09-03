@@ -1,4 +1,4 @@
-import 'dart:html';
+//import 'dart:html';
 
 import 'package:flutter_application_1/presentation/views/posts_view.dart';
 import 'package:flutter_application_1/presentation/views/events_view.dart';
@@ -78,26 +78,22 @@ class _MainScreenState extends State<MainScreen> {
               "https://i.pinimg.com/originals/1c/aa/03/1caa032c47f63d50902b9d34492e1303.jpg",
           isLiked: true)
     ];
-    
 
-   //Lista de Eventos
+    //Lista de Eventos
 
     List<Event> events = [
       Event(
           title1: "Están invitados a este torneo de SF.",
-          description1:
-              "Torneo de Street Figther",
+          description1: "Torneo de Street Figther",
           comments1: 8,
           likes1: 5,
           shares1: 3,
           dateCreated1: "Jueves, 19 de mayo",
           urlImg1: "https://i.ibb.co/6WwcvYF/Street-Figther.jpg",
           isLiked1: false),
-
       Event(
           title1: "Esto va a ser asombroso",
-          description1:
-              "Torneo de Smash Bros",
+          description1: "Torneo de Smash Bros",
           comments1: 4,
           likes1: 6,
           shares1: 2,
@@ -105,13 +101,8 @@ class _MainScreenState extends State<MainScreen> {
           urlImg1: "https://i.ibb.co/G3TLGmT/Ultimate.jpg",
           isLiked1: true),
     ];
-    
 
-
-
-
-
-   //Lista de Eventos
+    //Lista de Eventos
 
     final screens = [PostsView(posts), const EventsView(), const CreateView()];
 
@@ -138,9 +129,6 @@ class _MainScreenState extends State<MainScreen> {
         index: selectedIndex,
         children: screens,
       ),
-      
-      
-
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.shifting,
         currentIndex: selectedIndex,
@@ -166,7 +154,6 @@ class _MainScreenState extends State<MainScreen> {
                 color: Color.fromRGBO(37, 37, 37, 1)),
             activeIcon:
                 const Icon(Icons.star, color: Color.fromRGBO(37, 37, 37, 1)),
-
             label: 'Events',
             backgroundColor: colors.red1,
           ),
@@ -175,7 +162,6 @@ class _MainScreenState extends State<MainScreen> {
                 color: Color.fromRGBO(37, 37, 37, 1)),
             activeIcon:
                 const Icon(Icons.create, color: Color.fromRGBO(37, 37, 37, 1)),
-
             label: 'Create',
             backgroundColor: colors.red1,
           ),
