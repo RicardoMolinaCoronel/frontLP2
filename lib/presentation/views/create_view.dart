@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/presentation/theme/app_theme.dart';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
+import 'package:flutter_application_1/presentation/models/Post.dart';
+import 'dart:io';
+import 'package:image_picker/image_picker.dart';
 
 class CreateView extends StatefulWidget {
   const CreateView({super.key});
@@ -8,8 +13,17 @@ class CreateView extends StatefulWidget {
   State<CreateView> createState() => _CreateViewState();
 }
 
+ File? images;
+
 class _CreateViewState extends State<CreateView> {
   int count = 0;
+  final TextEditingController titulo = TextEditingController();
+  final TextEditingController texto = TextEditingController();
+
+  final TextEditingController tituloPost = TextEditingController();
+  final TextEditingController textoPost = TextEditingController();
+
+ 
 
   @override
   Widget build(BuildContext context) {
@@ -73,7 +87,7 @@ class _CreateViewState extends State<CreateView> {
                                         ),
                                       ),
                                       Text(
-                                        'Creador de Eventos ',
+                                        'Creador de Publicaciones ',
                                         style: TextStyle(
                                           color: Color.fromARGB(
                                               255, 160, 160, 160),
@@ -86,6 +100,7 @@ class _CreateViewState extends State<CreateView> {
                                 ]),
                                 SizedBox(height: 10),
                                 TextField(
+                                  controller: tituloPost,
                                   maxLines: 1,
                                   style: TextStyle(
                                       color: Color.fromARGB(255, 107, 107, 107),
@@ -99,6 +114,7 @@ class _CreateViewState extends State<CreateView> {
                                           fontSize: 24)),
                                 ),
                                 TextFormField(
+                                  controller: textoPost,
                                   maxLines: 5,
                                   style: TextStyle(
                                       color: Color.fromARGB(255, 107, 107, 107),
@@ -124,6 +140,7 @@ class _CreateViewState extends State<CreateView> {
                                     onTap: () {
                                       setState(() {
                                         // COLOCAR FUNCION AQUI
+                                        selectImg();
                                       });
                                     },
                                   ),
@@ -131,17 +148,26 @@ class _CreateViewState extends State<CreateView> {
                                   ElevatedButton(
                                     style: ElevatedButton.styleFrom(
                                         backgroundColor: AppTheme.colors.red4),
-                                    onPressed: () {
-                                      // Lógica para guardar el comentario
-                                      Navigator.pop(context);
+                                    onPressed: () async {
+                                      final nuevoPost = Post(
+                                      title: tituloPost.text,
+                                      description: textoPost.text,
+                                      urlImg: 'URL de la imagen',
+                                      likes: 0,
+                                      comments: 0,
+                                      shares: 0,
+                                      dateCreated: DateTime.now().toString(),
+                                      isLiked: false,
+                                      );
+                                      await crearPost(nuevoPost);
                                     },
                                     child: Text('Crear',
                                         style: TextStyle(
                                             color: Colors.white, fontSize: 15)),
                                   ),
                                 ]),
-                              ],
-                            ),
+                                 images != null?  Image.file(images!,fit: BoxFit.cover,) : const FlutterLogo(size: 160)
+                              ]),
                           ),
                         ),
                       );
@@ -217,6 +243,7 @@ class _CreateViewState extends State<CreateView> {
                               ]),
                               SizedBox(height: 10),
                               TextField(
+                                controller: titulo,
                                 maxLines: 1,
                                 style: TextStyle(
                                     color: Color.fromARGB(255, 107, 107, 107),
@@ -230,6 +257,7 @@ class _CreateViewState extends State<CreateView> {
                                         fontSize: 24)),
                               ),
                               TextFormField(
+                                controller: texto,
                                 maxLines: 5,
                                 style: TextStyle(
                                     color: Color.fromARGB(255, 107, 107, 107),
@@ -303,4 +331,60 @@ class _CreateViewState extends State<CreateView> {
       ),
     );
   }
+
+  Future selectImg() async {
+  XFile? picture = await ImagePicker().pickImage(source: ImageSource.gallery);
+  if (picture == null){
+    return;
+  }
+  setState(() {
+    images = File(picture.path);
+  });
+
+}
+
+}
+
+
+
+
+
+Future<void> crearPost(Post post) async {
+  final url = Uri.parse('http://192.168.1.36:3000/rest/publicacion/save'); // Reemplaza con la URL de tu API
+  final headers = {'Content-Type': 'application/json'};
+  final jsonPost = jsonEncode(post.toJson()); // Convierte el objeto Post a JSON
+
+  final response = await http.post(
+    url,
+    headers: headers,
+    body: jsonPost,
+  );
+
+  if (response.statusCode == 201) {
+    // La solicitud fue exitosa (código 201 indica creación exitosa)
+    print('El objeto Post se creó con éxito');
+
+    final responseData = jsonDecode(response.body);
+    print('Respuesta de la API: $responseData');
+  } else {
+    // Hubo un error en la solicitud
+    print('Error al crear el objeto Post');
+    print(response
+        .body); // Puedes imprimir la respuesta para obtener más detalles
+  }
+}
+
+
+Future<void> crearPost2(Post post) async {
+  final url = Uri.parse("http://192.168.1.36:3000/rest/publicacion/save"); // Reemplaza con la URL de tu API
+  var request = http.MultipartRequest("POST",url);
+
+  request.fields["titulo"] = post.title;
+  request.fields["descripcion"] = post.description;
+  request.fields["fechacreacion"] = post.dateCreated;
+  request.fields["urlimg"] = post.urlImg;
+
+  final response = await request.send();
+
+  response.stream.transform(utf8.decoder).listen((event) {print(event); });
 }

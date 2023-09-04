@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 class Post {
   String title;
   String description;
@@ -16,4 +18,17 @@ class Post {
       required this.shares,
       required this.dateCreated,
       required this.isLiked});
+
+
+      Map<String, dynamic> toJson() {
+    return {
+      'titulo': title,
+      'descripcion': description,
+      'fechacreacion': shares,
+      'urlimg': urlImg,
+    };
+      }
+
 }
+
+
