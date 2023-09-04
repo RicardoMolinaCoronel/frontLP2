@@ -166,7 +166,7 @@ class _CreateViewState extends State<CreateView> {
                                             color: Colors.white, fontSize: 15)),
                                   ),
                                 ]),
-                                 images != null?  Image.file(images!,fit: BoxFit.cover,) : const FlutterLogo(size: 160)
+                                 images != null?  Image.file(images!,width: 200, height: 200,fit: BoxFit.cover,) : const FlutterLogo(size: 160)
                               ]),
                           ),
                         ),
