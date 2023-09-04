@@ -13,7 +13,7 @@ class CreateView extends StatefulWidget {
   State<CreateView> createState() => _CreateViewState();
 }
 
- File? images;
+File? images;
 
 class _CreateViewState extends State<CreateView> {
   int count = 0;
@@ -22,8 +22,6 @@ class _CreateViewState extends State<CreateView> {
 
   final TextEditingController tituloPost = TextEditingController();
   final TextEditingController textoPost = TextEditingController();
-
- 
 
   @override
   Widget build(BuildContext context) {
@@ -66,108 +64,118 @@ class _CreateViewState extends State<CreateView> {
                           child: Padding(
                             padding: EdgeInsets.all(16.0),
                             child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Row(children: [
-                                  Icon(
-                                    Icons.person,
-                                    color: Colors.grey,
-                                    size: 35,
-                                  ),
-                                  Column(
-                                    children: [
-                                      Text(
-                                        'Jacob Hanks ',
-                                        style: TextStyle(
-                                          color: Color.fromARGB(
-                                              255, 160, 160, 160),
-                                          fontSize:
-                                              15, // Tamaño de fuente opcional
-                                        ),
-                                      ),
-                                      Text(
-                                        'Creador de Publicaciones ',
-                                        style: TextStyle(
-                                          color: Color.fromARGB(
-                                              255, 160, 160, 160),
-                                          fontSize:
-                                              13, // Tamaño de fuente opcional
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ]),
-                                SizedBox(height: 10),
-                                TextField(
-                                  controller: tituloPost,
-                                  maxLines: 1,
-                                  style: TextStyle(
-                                      color: Color.fromARGB(255, 107, 107, 107),
-                                      fontSize: 24,
-                                      fontWeight: FontWeight.w600),
-                                  decoration: InputDecoration(
-                                      hintText: 'Titulo',
-                                      hintStyle: TextStyle(
-                                          color: Color.fromARGB(
-                                              255, 107, 107, 107),
-                                          fontSize: 24)),
-                                ),
-                                TextFormField(
-                                  controller: textoPost,
-                                  maxLines: 5,
-                                  style: TextStyle(
-                                      color: Color.fromARGB(255, 107, 107, 107),
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.w700),
-                                  decoration: InputDecoration(
-                                    hintText: 'Escribe tu texto aquí...',
-                                    hintStyle: TextStyle(
-                                        color:
-                                            Color.fromARGB(255, 107, 107, 107),
-                                        fontSize: 18),
-                                  ),
-                                ),
-                                SizedBox(height: 10),
-                                Row(children: [
-                                  SizedBox(width: 20),
-                                  GestureDetector(
-                                    child: Icon(
-                                      Icons.image,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Row(children: [
+                                    Icon(
+                                      Icons.person,
                                       color: Colors.grey,
                                       size: 35,
                                     ),
-                                    onTap: () {
-                                      setState(() {
-                                        // COLOCAR FUNCION AQUI
-                                        selectImg();
-                                      });
-                                    },
+                                    Column(
+                                      children: [
+                                        Text(
+                                          'Jacob Hanks ',
+                                          style: TextStyle(
+                                            color: Color.fromARGB(
+                                                255, 160, 160, 160),
+                                            fontSize:
+                                                15, // Tamaño de fuente opcional
+                                          ),
+                                        ),
+                                        Text(
+                                          'Creador de Publicaciones ',
+                                          style: TextStyle(
+                                            color: Color.fromARGB(
+                                                255, 160, 160, 160),
+                                            fontSize:
+                                                13, // Tamaño de fuente opcional
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ]),
+                                  SizedBox(height: 10),
+                                  TextField(
+                                    controller: tituloPost,
+                                    maxLines: 1,
+                                    style: TextStyle(
+                                        color:
+                                            Color.fromARGB(255, 107, 107, 107),
+                                        fontSize: 24,
+                                        fontWeight: FontWeight.w600),
+                                    decoration: InputDecoration(
+                                        hintText: 'Titulo',
+                                        hintStyle: TextStyle(
+                                            color: Color.fromARGB(
+                                                255, 107, 107, 107),
+                                            fontSize: 24)),
                                   ),
-                                  SizedBox(width: 210),
-                                  ElevatedButton(
-                                    style: ElevatedButton.styleFrom(
-                                        backgroundColor: AppTheme.colors.red4),
-                                    onPressed: () async {
-                                      final nuevoPost = Post(
-                                      title: tituloPost.text,
-                                      description: textoPost.text,
-                                      urlImg: 'URL de la imagen',
-                                      likes: 0,
-                                      comments: 0,
-                                      shares: 0,
-                                      dateCreated: DateTime.now().toString(),
-                                      isLiked: false,
-                                      );
-                                      await crearPost(nuevoPost);
-                                    },
-                                    child: Text('Crear',
-                                        style: TextStyle(
-                                            color: Colors.white, fontSize: 15)),
+                                  TextFormField(
+                                    controller: textoPost,
+                                    maxLines: 5,
+                                    style: TextStyle(
+                                        color:
+                                            Color.fromARGB(255, 107, 107, 107),
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.w700),
+                                    decoration: InputDecoration(
+                                      hintText: 'Escribe tu texto aquí...',
+                                      hintStyle: TextStyle(
+                                          color: Color.fromARGB(
+                                              255, 107, 107, 107),
+                                          fontSize: 18),
+                                    ),
                                   ),
+                                  SizedBox(height: 10),
+                                  Row(children: [
+                                    SizedBox(width: 20),
+                                    GestureDetector(
+                                      child: Icon(
+                                        Icons.image_search,
+                                        color: Colors.grey,
+                                        size: 35,
+                                      ),
+                                      onTap: () {
+                                        setState(() {
+                                          // COLOCAR FUNCION AQUI
+                                          selectImg();
+                                        });
+                                      },
+                                    ),
+                                    SizedBox(width: 210),
+                                    ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                          backgroundColor:
+                                              AppTheme.colors.red4),
+                                      onPressed: () async {
+                                        final nuevoPost = Post(
+                                          title: tituloPost.text,
+                                          description: textoPost.text,
+                                          urlImg: 'URL de la imagen',
+                                          likes: 0,
+                                          comments: 0,
+                                          shares: 0,
+                                          dateCreated:
+                                              DateTime.now().toString(),
+                                          isLiked: false,
+                                        );
+                                        await crearPost(nuevoPost);
+                                      },
+                                      child: Text('Crear',
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 15)),
+                                    ),
+                                  ]),
+                                  images != null
+                                      ? Image.file(
+                                          images!,
+                                          fit: BoxFit.cover,
+                                        )
+                                      : const Icon(Icons.image, size: 160)
                                 ]),
-                                 images != null?  Image.file(images!,width: 200, height: 200,fit: BoxFit.cover,) : const FlutterLogo(size: 160)
-                              ]),
                           ),
                         ),
                       );
@@ -333,24 +341,19 @@ class _CreateViewState extends State<CreateView> {
   }
 
   Future selectImg() async {
-  XFile? picture = await ImagePicker().pickImage(source: ImageSource.gallery);
-  if (picture == null){
-    return;
+    XFile? picture = await ImagePicker().pickImage(source: ImageSource.gallery);
+    if (picture == null) {
+      return;
+    }
+    setState(() {
+      images = File(picture.path);
+    });
   }
-  setState(() {
-    images = File(picture.path);
-  });
-
 }
-
-}
-
-
-
-
 
 Future<void> crearPost(Post post) async {
-  final url = Uri.parse('http://192.168.1.36:3000/rest/publicacion/save'); // Reemplaza con la URL de tu API
+  final url = Uri.parse(
+      'http://192.168.1.36:3000/rest/publicacion/save'); // Reemplaza con la URL de tu API
   final headers = {'Content-Type': 'application/json'};
   final jsonPost = jsonEncode(post.toJson()); // Convierte el objeto Post a JSON
 
@@ -374,10 +377,10 @@ Future<void> crearPost(Post post) async {
   }
 }
 
-
 Future<void> crearPost2(Post post) async {
-  final url = Uri.parse("http://192.168.1.36:3000/rest/publicacion/save"); // Reemplaza con la URL de tu API
-  var request = http.MultipartRequest("POST",url);
+  final url = Uri.parse(
+      "http://192.168.1.36:3000/rest/publicacion/save"); // Reemplaza con la URL de tu API
+  var request = http.MultipartRequest("POST", url);
 
   request.fields["titulo"] = post.title;
   request.fields["descripcion"] = post.description;
@@ -386,5 +389,7 @@ Future<void> crearPost2(Post post) async {
 
   final response = await request.send();
 
-  response.stream.transform(utf8.decoder).listen((event) {print(event); });
+  response.stream.transform(utf8.decoder).listen((event) {
+    print(event);
+  });
 }
