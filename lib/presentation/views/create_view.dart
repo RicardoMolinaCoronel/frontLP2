@@ -174,7 +174,7 @@ class _CreateViewState extends State<CreateView> {
                                           images!,
                                           fit: BoxFit.cover,
                                         )
-                                      : const Icon(Icons.image_search, size: 160)
+                                      : const Icon(Icons.image, size: 160)
                                 ]),
                           ),
                         ),
