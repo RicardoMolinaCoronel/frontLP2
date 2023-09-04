@@ -169,12 +169,15 @@ class _CreateViewState extends State<CreateView> {
                                               fontSize: 15)),
                                     ),
                                   ]),
+
+                                  Center( child:
                                   images != null
                                       ? Image.file(
                                           images!,
                                           fit: BoxFit.cover,
                                         )
                                       : const Icon(Icons.image, size: 160)
+                                  )
                                 ]),
                           ),
                         ),
