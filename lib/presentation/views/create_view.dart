@@ -286,7 +286,7 @@ class _CreateViewState extends State<CreateView> {
                                 SizedBox(width: 20),
                                 GestureDetector(
                                   child: Icon(
-                                    Icons.image,
+                                    Icons.image_search,
                                     color: Colors.grey,
                                     size: 35,
                                   ),
