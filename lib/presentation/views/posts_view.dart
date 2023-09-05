@@ -68,28 +68,38 @@ class _PostsViewState extends State<PostsView> {
   @override
   void initState() {
     super.initState();
-    _listadoPosts = _getPosts();
+    actualizarPosts();
+  }
+
+  Future<void> actualizarPosts() async {
+    setState(() {
+      _listadoPosts = _getPosts();
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: AppTheme.colors.blue1,
-        body: FutureBuilder(
-            future: _listadoPosts,
-            builder: ((context, snapshot) {
-              if (snapshot.hasData) {
-                return SafeArea(
-                  child: ListView.builder(
-                    itemCount: snapshot.data?.length,
-                    itemBuilder: (context, index) {
-                      return ItemPost(child: snapshot.data![index]);
-                    },
-                  ),
-                );
-              }
-              return Center(child: CircularProgressIndicator());
-            })));
+        body: RefreshIndicator(
+            onRefresh: () {
+              return actualizarPosts();
+            },
+            child: FutureBuilder(
+                future: _listadoPosts,
+                builder: ((context, snapshot) {
+                  if (snapshot.hasData) {
+                    return SafeArea(
+                      child: ListView.builder(
+                        itemCount: snapshot.data?.length,
+                        itemBuilder: (context, index) {
+                          return ItemPost(child: snapshot.data![index]);
+                        },
+                      ),
+                    );
+                  }
+                  return Center(child: CircularProgressIndicator());
+                }))));
   }
 
   Widget _recentPosts(context) {
