@@ -175,7 +175,7 @@ class _CreateViewState extends State<CreateView> {
                                         final nuevoPost = Post(
                                           title: tituloPost.text,
                                           description: textoPost.text,
-                                          urlImg: 'URL de la imagen',
+                                          urlImg: 'https://images5.alphacoders.com/130/1303880.jpeg',
                                           likes: 0,
                                           comments: 0,
                                           shares: 0,
@@ -343,9 +343,9 @@ class _CreateViewState extends State<CreateView> {
                                     final nuevoEvento = Event(
                                       title: titulo.text,
                                       description: texto.text,
-                                      nameEvent: "a",
+                                      nameEvent: "Torneo Mario Kart 8",
                                       place: "Cuenca",
-                                      urlImg: 'URL de la imagen',
+                                      urlImg: 'https://i.pinimg.com/originals/ae/fb/c3/aefbc397b90d25a7fe17efbaefc19b43.png',
                                       likes: 0,
                                       comments: 0,
                                       shares: 0,
@@ -467,7 +467,7 @@ Future<void> crearEvent(Event event) async {
 
 Future<void> crearPost2(Post post) async {
   final url = Uri.parse(
-      "http://192.168.1.36:3000/rest/publicacion/save"); // Reemplaza con la URL de tu API
+      "http://192.168.1.8:3000/rest/publicacion/save"); // Reemplaza con la URL de tu API
   var request = http.MultipartRequest("POST", url);
 
   request.fields["titulo"] = post.title;
