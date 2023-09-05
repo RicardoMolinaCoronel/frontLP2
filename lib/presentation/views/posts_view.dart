@@ -39,7 +39,7 @@ class _PostsViewState extends State<PostsView> {
           descripcion = item["descripcion"];
         }
 
-        if (item["urlimg"] == null) {
+        if (item["urlimg"] == null || item["urlimg"] == "URL de la imagen") {
           urlImg = "NoExiste";
         } else {
           urlImg = item["urlimg"];

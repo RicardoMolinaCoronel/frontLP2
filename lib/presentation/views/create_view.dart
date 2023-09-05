@@ -8,7 +8,6 @@ import 'dart:io';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter_application_1/presentation/models/connection.dart';
 
-
 class CreateView extends StatefulWidget {
   const CreateView({super.key});
 
@@ -20,17 +19,18 @@ File? images;
 
 class _CreateViewState extends State<CreateView> {
   int count = 0;
-  final TextEditingController titulo = TextEditingController();
-  final TextEditingController texto = TextEditingController();
+  TextEditingController titulo = TextEditingController();
+  TextEditingController texto = TextEditingController();
 
-  final TextEditingController tituloPost = TextEditingController();
-  final TextEditingController textoPost = TextEditingController();
+  TextEditingController tituloPost = TextEditingController();
+  TextEditingController textoPost = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
     double sizedBoxHeight = screenHeight * 0.9;
-
+    String tituloVentana = "Titulo";
+    String descripcionVentana = "Escribe tu texto aquí...";
     return Scaffold(
       backgroundColor: AppTheme.colors.blue1,
       body: SafeArea(
@@ -109,7 +109,7 @@ class _CreateViewState extends State<CreateView> {
                                         fontSize: 24,
                                         fontWeight: FontWeight.w600),
                                     decoration: InputDecoration(
-                                        hintText: 'Titulo',
+                                        hintText: tituloVentana,
                                         hintStyle: TextStyle(
                                             color: Color.fromARGB(
                                                 255, 107, 107, 107),
@@ -124,7 +124,7 @@ class _CreateViewState extends State<CreateView> {
                                         fontSize: 18,
                                         fontWeight: FontWeight.w700),
                                     decoration: InputDecoration(
-                                      hintText: 'Escribe tu texto aquí...',
+                                      hintText: descripcionVentana,
                                       hintStyle: TextStyle(
                                           color: Color.fromARGB(
                                               255, 107, 107, 107),
@@ -165,6 +165,10 @@ class _CreateViewState extends State<CreateView> {
                                           isLiked: false,
                                         );
                                         await crearPost(nuevoPost);
+                                        setState(() {
+                                          tituloPost.text = "";
+                                          textoPost.text = "";
+                                        });
                                         Navigator.pop(context);
                                       },
                                       child: Text('Crear',
@@ -179,7 +183,8 @@ class _CreateViewState extends State<CreateView> {
                                               images!,
                                               fit: BoxFit.cover,
                                             )
-                                          : const Icon(Icons.image, size: 160))
+                                          : const Icon(Icons.image,
+                                              size: 160, color: Colors.grey))
                                 ]),
                           ),
                         ),
@@ -320,20 +325,22 @@ class _CreateViewState extends State<CreateView> {
                                   onPressed: () async {
                                     // Lógica para guardar el comentario
                                     final nuevoEvento = Event(
-                                          title: titulo.text,
-                                          description: texto.text,
-                                          nameEvent: "a",
-                                          place: "Cuenca",
-                                          urlImg: 'URL de la imagen',
-                                          likes: 0,
-                                          comments: 0,
-                                          shares: 0,
-                                          dateCreated:
-                                              DateTime.now().toString(),
-                                          date: "2023-11-13 02:00:00",
-                                          isLiked: false,
-                                        );
-                                        
+                                      title: titulo.text,
+                                      description: texto.text,
+                                      nameEvent: "a",
+                                      place: "Cuenca",
+                                      urlImg: 'URL de la imagen',
+                                      likes: 0,
+                                      comments: 0,
+                                      shares: 0,
+                                      dateCreated: DateTime.now().toString(),
+                                      date: "2023-11-13 02:00:00",
+                                      isLiked: false,
+                                    );
+                                    setState(() {
+                                      titulo.text = "";
+                                      texto.text = "";
+                                    });
                                     Navigator.pop(context);
                                   },
                                   child: Text(
@@ -349,7 +356,11 @@ class _CreateViewState extends State<CreateView> {
                                           images!,
                                           fit: BoxFit.cover,
                                         )
-                                      : const Icon(Icons.image, size: 160))
+                                      : const Icon(
+                                          Icons.image,
+                                          size: 160,
+                                          color: Colors.grey,
+                                        ))
                             ],
                           ),
                         ),
@@ -378,15 +389,13 @@ class _CreateViewState extends State<CreateView> {
       images = File(picture.path);
     });
   }
-
-  
 }
 
-
 Future<void> crearPost(Post post) async {
-  String ipPuerto=Connection.direccionIp+":"+Connection.puerto;
-  final url = Uri.parse(
-      'http://'+ipPuerto+ '/rest/publicacion/save'); // Reemplaza con la URL de tu API
+  String ipPuerto = Connection.direccionIp + ":" + Connection.puerto;
+  final url = Uri.parse('http://' +
+      ipPuerto +
+      '/rest/publicacion/save'); // Reemplaza con la URL de tu API
   final headers = {'Content-Type': 'application/json'};
   final jsonPost = jsonEncode(post.toJson()); // Convierte el objeto Post a JSON
 
@@ -414,7 +423,8 @@ Future<void> crearEvent(Event event) async {
   final url = Uri.parse(
       'http://192.168.1.36:3000/rest/evento/save'); // Reemplaza con la URL de tu API
   final headers = {'Content-Type': 'application/json'};
-  final jsonPost = jsonEncode(event.toJson()); // Convierte el objeto Event a JSON
+  final jsonPost =
+      jsonEncode(event.toJson()); // Convierte el objeto Event a JSON
 
   final response = await http.post(
     url,
