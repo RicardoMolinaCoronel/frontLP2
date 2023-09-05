@@ -1,4 +1,4 @@
-/*import 'package:flutter_application_1/presentation/models/Event.dart';
+import 'package:flutter_application_1/presentation/models/event.dart';
 import 'package:flutter_application_1/presentation/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 
@@ -27,11 +27,11 @@ class _ItemEventState extends State<ItemEvent> {
             children: <Widget>[
               Padding(
                 padding: const EdgeInsets.only(bottom: 15),
-                child: _infoPostTexts(context),
+                child: _infoEventTexts(context),
               ),
               Padding(
                   padding: const EdgeInsets.only(bottom: 15),
-                  child: _postPicture()),
+                  child: _eventPicture()),
               Padding(
                   padding: const EdgeInsets.only(left: 20, right: 20, top: 10),
                   child: Row(
@@ -70,27 +70,27 @@ class _ItemEventState extends State<ItemEvent> {
         color: Colors.white,
         borderRadius: BorderRadius.circular(10.0),
       ),
-      child: ClipRRect(
+      /*child: ClipRRect(
         borderRadius: BorderRadius.circular(10.0),
         child: Image.network(
           this.widget.child.urlImg,
           width: 30.0,
         ),
-      ),
+      ),*/
     );
   }
 
-  Widget _postPicture() {
+  Widget _eventPicture() {
     return Container(
       decoration: BoxDecoration(
         color: Colors.white,
       ),
-      child: ClipRRect(
+      /* child: ClipRRect(
         child: Image.network(
           this.widget.child.urlImg,
           width: 300.0,
         ),
-      ),
+      ),*/
     );
   }
 
@@ -156,7 +156,7 @@ class _ItemEventState extends State<ItemEvent> {
     ]);
   }
 
-  Widget _infoPostTexts(context) {
+  Widget _infoEventTexts(context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -180,9 +180,24 @@ class _ItemEventState extends State<ItemEvent> {
           ),
         ),
         SizedBox(height: 3.0),
-       
+        /* Row(
+          children: <Widget>[
+            Icon(
+              Icons.location_on,
+              color: Theme.of(context).highlightColor,
+              size: 15.0,
+            ),
+            SizedBox(width: 5.0),
+            Text(
+              this.widget.child.title,
+              style: TextStyle(
+                fontSize: 15.0,
+                color: this.widget.themeDark ? Color(0XFFB7B7D2) : Colors.grey,
+              ),
+            )
+          ],
+        ),*/
       ],
     );
   }
 }
-*/
