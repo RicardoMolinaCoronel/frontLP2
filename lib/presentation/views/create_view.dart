@@ -18,6 +18,7 @@ class CreateView extends StatefulWidget {
 File? images;
 
 class _CreateViewState extends State<CreateView> {
+  String urlImagen = "https://images5.alphacoders.com/130/1303880.jpeg";
   var _currentSelectedDate;
   int count = 0;
   TextEditingController titulo = TextEditingController();
@@ -31,6 +32,11 @@ class _CreateViewState extends State<CreateView> {
     setState(() {
       dateEvent = selectedDate!;
     });
+  }
+
+  Icon tieneImagen() {
+    urlImagen = "URL de la imagen";
+    return const Icon(Icons.image, size: 160, color: Colors.grey);
   }
 
   Future<DateTime?> getDatePickerWidget() {
@@ -175,7 +181,7 @@ class _CreateViewState extends State<CreateView> {
                                         final nuevoPost = Post(
                                           title: tituloPost.text,
                                           description: textoPost.text,
-                                          urlImg: 'https://images5.alphacoders.com/130/1303880.jpeg',
+                                          urlImg: urlImagen,
                                           likes: 0,
                                           comments: 0,
                                           shares: 0,
@@ -202,8 +208,7 @@ class _CreateViewState extends State<CreateView> {
                                               images!,
                                               fit: BoxFit.cover,
                                             )
-                                          : const Icon(Icons.image,
-                                              size: 160, color: Colors.grey))
+                                          : tieneImagen())
                                 ]),
                           ),
                         ),
@@ -345,7 +350,8 @@ class _CreateViewState extends State<CreateView> {
                                       description: texto.text,
                                       nameEvent: "Torneo Mario Kart 8",
                                       place: "Cuenca",
-                                      urlImg: 'https://i.pinimg.com/originals/ae/fb/c3/aefbc397b90d25a7fe17efbaefc19b43.png',
+                                      urlImg:
+                                          'https://i.pinimg.com/originals/ae/fb/c3/aefbc397b90d25a7fe17efbaefc19b43.png',
                                       likes: 0,
                                       comments: 0,
                                       shares: 0,

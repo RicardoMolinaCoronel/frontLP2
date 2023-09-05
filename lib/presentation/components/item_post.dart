@@ -18,6 +18,11 @@ class ItemPost extends StatefulWidget {
 
 class _ItemPostState extends State<ItemPost> {
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Padding(
       padding:
@@ -158,6 +163,37 @@ class _ItemPostState extends State<ItemPost> {
     } else {
       // Hubo un error en la solicitud
       print('Error al crear el objeto likepublicacion');
+      print(response
+          .body); // Puedes imprimir la respuesta para obtener más detalles
+    }
+    return 0;
+  }
+
+  Future<int> borrarLike(int id) async {
+    String ipPuerto = Connection.direccionIp + ":" + Connection.puerto;
+    final url = Uri.parse('http://' +
+        ipPuerto +
+        '/rest/like/delete/' +
+        id.toString()); // Reemplaza con la URL de tu API
+    final headers = {'Content-Type': 'application/json'};
+    // Convierte el objeto Post a JSON
+
+    final response = await http.delete(
+      url,
+      headers: headers,
+    );
+
+    if (response.statusCode == 204) {
+      // La solicitud fue exitosa (código 201 indica creación exitosa)
+      print('El objeto likepublicacion se creó con éxito');
+
+      final responseData = jsonDecode(response.body);
+
+      print('Respuesta de la API: $responseData');
+      return responseData["idlike"];
+    } else {
+      // Hubo un error en la solicitud
+
       print(response
           .body); // Puedes imprimir la respuesta para obtener más detalles
     }
