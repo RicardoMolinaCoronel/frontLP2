@@ -1,22 +1,43 @@
-//tt
 
 class Event {
-  String title1;
-  String description1;
-  String urlImg1;
-  int likes1;
-  int comments1;
-  int shares1;
-  String dateCreated1;
-  bool isLiked1;
+  String title;
+  String description;
+  String nameEvent;
+  String place;
+  String urlImg;
+  int likes;
+  int comments;
+  int shares;
+  String dateCreated;
+  String date;
+  bool isLiked;
   
   Event(
-      {required this.title1,
-      required this.description1,
-      required this.urlImg1,
-      required this.likes1,
-      required this.comments1,
-      required this.shares1,
-      required this.dateCreated1,
-      required this.isLiked1});
+      {required this.title,
+      required this.description,
+      required this.nameEvent,
+      required this.place,
+      required this.urlImg,
+      required this.likes,
+      required this.comments,
+      required this.shares,
+      required this.dateCreated,
+      required this.date,
+      required this.isLiked});
+
+      Map<String, dynamic> toJson() {
+    return {
+      'titulo': title,
+      'descripcion': description,
+      'nombreevento': nameEvent,
+      'fechacreacion': dateCreated,
+      'fechaevento': date,
+      'lugarevento': place,
+      'urlimg': urlImg,
+    };
+
+
+      }
+
+
 }

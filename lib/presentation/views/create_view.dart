@@ -3,8 +3,10 @@ import 'package:flutter_application_1/presentation/theme/app_theme.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter_application_1/presentation/models/Post.dart';
+import 'package:flutter_application_1/presentation/models/Event.dart';
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
+
 
 class CreateView extends StatefulWidget {
   const CreateView({super.key});
@@ -162,6 +164,7 @@ class _CreateViewState extends State<CreateView> {
                                           isLiked: false,
                                         );
                                         await crearPost(nuevoPost);
+                                        Navigator.pop(context);
                                       },
                                       child: Text('Crear',
                                           style: TextStyle(
@@ -169,15 +172,13 @@ class _CreateViewState extends State<CreateView> {
                                               fontSize: 15)),
                                     ),
                                   ]),
-
-                                  Center( child:
-                                  images != null
-                                      ? Image.file(
-                                          images!,
-                                          fit: BoxFit.cover,
-                                        )
-                                      : const Icon(Icons.image, size: 160)
-                                  )
+                                  Center(
+                                      child: images != null
+                                          ? Image.file(
+                                              images!,
+                                              fit: BoxFit.cover,
+                                            )
+                                          : const Icon(Icons.image, size: 160))
                                 ]),
                           ),
                         ),
@@ -307,6 +308,7 @@ class _CreateViewState extends State<CreateView> {
                                   onTap: () {
                                     setState(() {
                                       // COLOCAR FUNCION AQUI
+                                      //selectDateTime();
                                     });
                                   },
                                 ),
@@ -314,8 +316,23 @@ class _CreateViewState extends State<CreateView> {
                                 ElevatedButton(
                                   style: ElevatedButton.styleFrom(
                                       backgroundColor: AppTheme.colors.red4),
-                                  onPressed: () {
+                                  onPressed: () async {
                                     // Lógica para guardar el comentario
+                                    final nuevoEvento = Event(
+                                          title: titulo.text,
+                                          description: texto.text,
+                                          nameEvent: "a",
+                                          place: "Cuenca",
+                                          urlImg: 'URL de la imagen',
+                                          likes: 0,
+                                          comments: 0,
+                                          shares: 0,
+                                          dateCreated:
+                                              DateTime.now().toString(),
+                                          date: "2023-11-13 02:00:00",
+                                          isLiked: false,
+                                        );
+                                        
                                     Navigator.pop(context);
                                   },
                                   child: Text(
@@ -325,15 +342,13 @@ class _CreateViewState extends State<CreateView> {
                                   ),
                                 ),
                               ]),
-
-                              Center( child:
-                                  images != null
+                              Center(
+                                  child: images != null
                                       ? Image.file(
                                           images!,
                                           fit: BoxFit.cover,
                                         )
-                                      : const Icon(Icons.image, size: 160)
-                                  )
+                                      : const Icon(Icons.image, size: 160))
                             ],
                           ),
                         ),
@@ -362,13 +377,42 @@ class _CreateViewState extends State<CreateView> {
       images = File(picture.path);
     });
   }
+
+  
 }
+
 
 Future<void> crearPost(Post post) async {
   final url = Uri.parse(
       'http://192.168.1.36:3000/rest/publicacion/save'); // Reemplaza con la URL de tu API
   final headers = {'Content-Type': 'application/json'};
   final jsonPost = jsonEncode(post.toJson()); // Convierte el objeto Post a JSON
+
+  final response = await http.post(
+    url,
+    headers: headers,
+    body: jsonPost,
+  );
+
+  if (response.statusCode == 201) {
+    // La solicitud fue exitosa (código 201 indica creación exitosa)
+    print('El objeto Post se creó con éxito');
+
+    final responseData = jsonDecode(response.body);
+    print('Respuesta de la API: $responseData');
+  } else {
+    // Hubo un error en la solicitud
+    print('Error al crear el objeto Post');
+    print(response
+        .body); // Puedes imprimir la respuesta para obtener más detalles
+  }
+}
+
+Future<void> crearEvent(Event event) async {
+  final url = Uri.parse(
+      'http://192.168.1.36:3000/rest/evento/save'); // Reemplaza con la URL de tu API
+  final headers = {'Content-Type': 'application/json'};
+  final jsonPost = jsonEncode(event.toJson()); // Convierte el objeto Event a JSON
 
   final response = await http.post(
     url,

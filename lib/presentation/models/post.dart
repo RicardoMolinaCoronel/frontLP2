@@ -24,7 +24,7 @@ class Post {
     return {
       'titulo': title,
       'descripcion': description,
-      'fechacreacion': shares,
+      'fechacreacion': dateCreated,
       'urlimg': urlImg,
     };
       }
