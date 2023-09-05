@@ -18,12 +18,31 @@ class CreateView extends StatefulWidget {
 File? images;
 
 class _CreateViewState extends State<CreateView> {
+  var _currentSelectedDate;
   int count = 0;
   TextEditingController titulo = TextEditingController();
   TextEditingController texto = TextEditingController();
 
   TextEditingController tituloPost = TextEditingController();
   TextEditingController textoPost = TextEditingController();
+  DateTime dateEvent = DateTime.now();
+  void callDatePicker() async {
+    var selectedDate = await getDatePickerWidget();
+    setState(() {
+      dateEvent = selectedDate!;
+    });
+  }
+
+  Future<DateTime?> getDatePickerWidget() {
+    return showDatePicker(
+        context: context,
+        initialDate: DateTime.now(),
+        firstDate: DateTime(2023),
+        lastDate: DateTime(2024),
+        builder: (context, child) {
+          return Theme(data: ThemeData.dark(), child: child!);
+        });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -290,7 +309,7 @@ class _CreateViewState extends State<CreateView> {
                               ),
                               SizedBox(height: 10),
                               Row(children: [
-                                SizedBox(width: 20),
+                                SizedBox(width: 10),
                                 GestureDetector(
                                   child: Icon(
                                     Icons.image_search,
@@ -312,10 +331,7 @@ class _CreateViewState extends State<CreateView> {
                                     size: 35,
                                   ),
                                   onTap: () {
-                                    setState(() {
-                                      // COLOCAR FUNCION AQUI
-                                      //selectDateTime();
-                                    });
+                                    callDatePicker();
                                   },
                                 ),
                                 SizedBox(width: 170),
@@ -334,9 +350,10 @@ class _CreateViewState extends State<CreateView> {
                                       comments: 0,
                                       shares: 0,
                                       dateCreated: DateTime.now().toString(),
-                                      date: "2023-11-13 02:00:00",
+                                      date: dateEvent.toString(),
                                       isLiked: false,
                                     );
+                                    await crearEvent(nuevoEvento);
                                     setState(() {
                                       titulo.text = "";
                                       texto.text = "";
@@ -420,8 +437,10 @@ Future<void> crearPost(Post post) async {
 }
 
 Future<void> crearEvent(Event event) async {
-  final url = Uri.parse(
-      'http://192.168.1.36:3000/rest/evento/save'); // Reemplaza con la URL de tu API
+  String ipPuerto = Connection.direccionIp + ":" + Connection.puerto;
+  final url = Uri.parse('http://' +
+      ipPuerto +
+      '/rest/evento/save'); // Reemplaza con la URL de tu API
   final headers = {'Content-Type': 'application/json'};
   final jsonPost =
       jsonEncode(event.toJson()); // Convierte el objeto Event a JSON
