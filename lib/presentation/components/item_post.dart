@@ -1,6 +1,10 @@
 import 'package:flutter_application_1/presentation/models/post.dart';
+import 'package:flutter_application_1/presentation/models/likepublicacion.dart';
 import 'package:flutter_application_1/presentation/theme/app_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/presentation/models/connection.dart';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 
 class ItemPost extends StatefulWidget {
   final Post child;
@@ -81,19 +85,86 @@ class _ItemPostState extends State<ItemPost> {
   }
 
   Widget _postPicture() {
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.white,
-      ),
-      /* child: ClipRRect(
-        child: Image.network(
-          this.widget.child.urlImg,
-          width: 300.0,
+    if (this.widget.child.urlImg != "NoExiste") {
+      return Container(
+        decoration: BoxDecoration(
+          color: Colors.white,
         ),
-      ),*/
-    );
+        child: ClipRRect(
+          child: Image.network(
+            this.widget.child.urlImg,
+            width: 300.0,
+          ),
+        ),
+      );
+    }
+    return Container(
+        decoration: BoxDecoration(
+      color: Colors.white,
+    ));
   }
 
+  Future<void> crearLikePublicacion(int idPost, int idLike) async {
+    String ipPuerto = Connection.direccionIp + ":" + Connection.puerto;
+    final url = Uri.parse('http://' +
+        ipPuerto +
+        '/rest/likepublicacion/save'); // Reemplaza con la URL de tu API
+    final headers = {'Content-Type': 'application/json'};
+    likepublicacion lp = likepublicacion(idPost: idPost, idLike: idLike);
+    final jsonLikePublicacion =
+        jsonEncode(lp.toJson()); // Convierte el objeto Post a JSON
+
+    final response = await http.post(
+      url,
+      headers: headers,
+      body: jsonLikePublicacion,
+    );
+
+    if (response.statusCode == 201) {
+      // La solicitud fue exitosa (código 201 indica creación exitosa)
+      print('El objeto likepublicacion se creó con éxito');
+
+      final responseData = jsonDecode(response.body);
+      print('Respuesta de la API: $responseData');
+    } else {
+      // Hubo un error en la solicitud
+      print('Error al crear el objeto likepublicacion');
+      print(response
+          .body); // Puedes imprimir la respuesta para obtener más detalles
+    }
+  }
+
+  Future<int> crearLike() async {
+    String ipPuerto = Connection.direccionIp + ":" + Connection.puerto;
+    final url = Uri.parse('http://' +
+        ipPuerto +
+        '/rest/like/save'); // Reemplaza con la URL de tu API
+    final headers = {'Content-Type': 'application/json'};
+    // Convierte el objeto Post a JSON
+
+    final response = await http.post(
+      url,
+      headers: headers,
+    );
+
+    if (response.statusCode == 201) {
+      // La solicitud fue exitosa (código 201 indica creación exitosa)
+      print('El objeto likepublicacion se creó con éxito');
+
+      final responseData = jsonDecode(response.body);
+
+      print('Respuesta de la API: $responseData');
+      return responseData["idlike"];
+    } else {
+      // Hubo un error en la solicitud
+      print('Error al crear el objeto likepublicacion');
+      print(response
+          .body); // Puedes imprimir la respuesta para obtener más detalles
+    }
+    return 0;
+  }
+
+  late Future<int> idlike;
   Widget _likeIcon() {
     return Row(children: [
       GestureDetector(
@@ -106,6 +177,9 @@ class _ItemPostState extends State<ItemPost> {
           setState(() {
             this.widget.child.isLiked = !this.widget.child.isLiked;
           });
+          if (this.widget.child.isLiked) {
+            idlike = crearLike();
+          }
         },
       ),
       Text("Like",

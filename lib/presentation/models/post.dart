@@ -19,16 +19,12 @@ class Post {
       required this.dateCreated,
       required this.isLiked});
 
-
-      Map<String, dynamic> toJson() {
+  Map<String, dynamic> toJson() {
     return {
       'titulo': title,
       'descripcion': description,
       'fechacreacion': dateCreated,
       'urlimg': urlImg,
     };
-      }
-
+  }
 }
-
-
