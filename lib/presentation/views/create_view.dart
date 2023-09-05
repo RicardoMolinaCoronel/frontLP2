@@ -5,6 +5,7 @@ import 'package:http/http.dart' as http;
 import 'package:flutter_application_1/presentation/models/Post.dart';
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
+import 'package:flutter_application_1/presentation/models/connection.dart';
 
 class CreateView extends StatefulWidget {
   const CreateView({super.key});
@@ -365,8 +366,9 @@ class _CreateViewState extends State<CreateView> {
 }
 
 Future<void> crearPost(Post post) async {
+  String ipPuerto=Connection.direccionIp+":"+Connection.puerto;
   final url = Uri.parse(
-      'http://192.168.1.36:3000/rest/publicacion/save'); // Reemplaza con la URL de tu API
+      'http://'+ipPuerto+ '/rest/publicacion/save'); // Reemplaza con la URL de tu API
   final headers = {'Content-Type': 'application/json'};
   final jsonPost = jsonEncode(post.toJson()); // Convierte el objeto Post a JSON
 

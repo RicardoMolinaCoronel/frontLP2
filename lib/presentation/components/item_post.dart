@@ -70,13 +70,13 @@ class _ItemPostState extends State<ItemPost> {
         color: Colors.white,
         borderRadius: BorderRadius.circular(10.0),
       ),
-      child: ClipRRect(
+      /*child: ClipRRect(
         borderRadius: BorderRadius.circular(10.0),
         child: Image.network(
           this.widget.child.urlImg,
           width: 30.0,
         ),
-      ),
+      ),*/
     );
   }
 
@@ -85,12 +85,12 @@ class _ItemPostState extends State<ItemPost> {
       decoration: BoxDecoration(
         color: Colors.white,
       ),
-      child: ClipRRect(
+      /* child: ClipRRect(
         child: Image.network(
           this.widget.child.urlImg,
           width: 300.0,
         ),
-      ),
+      ),*/
     );
   }
 
