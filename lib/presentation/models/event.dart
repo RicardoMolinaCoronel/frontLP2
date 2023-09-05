@@ -1,3 +1,4 @@
+import 'dart:convert';
 
 class Event {
   String title;
